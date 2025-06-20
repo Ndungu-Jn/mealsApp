@@ -12,15 +12,25 @@ const Meals = () => {
         // console.log(res.data.meals);
         setItems(res.data.meals);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
-  return (
-    <div>
-      <h1>Meals</h1>
-    </div>
-  );
+
+  const itemsList = items.map(({ strMeal, strMealThumb, idMeal }) => {
+    return (
+      <div key={idMeal} className="meal-item">
+        <section className="card">
+          <img src={strMealThumb} alt={strMeal} />
+        </section>
+        <section className="content">
+          <p>{strMeal}</p>
+          <p>#{idMeal}</p>
+        </section>
+      </div>
+    );
+  });
+  return <div className="items-container">{itemsList}</div>;
 };
 
 export default Meals;
